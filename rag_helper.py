@@ -36,7 +36,7 @@ class RAG:
 
     def search(self, question, course='llm-zoomcamp'):
         boost_dict = {'question': 2.0, 'section': 0.5}
-        filter_dict = {'course': course}
+        filter_dict = {'course': self.course}
 
         return self.index.search(
             question,
@@ -79,7 +79,14 @@ class RAG:
         )
 
         # depending on client, output_text may be attribute or key
-        return getattr(response, 'output_text', None) or response.get('output_text')
+        return response.output_text 
+    
+
+    def rag(self,query):
+        search_results = self.search(query)
+        prompt = self.build_prompt(query, search_results)
+        answer = self.llm(prompt)
+        return answer 
 
 
 
