@@ -17,7 +17,7 @@ USER_PROMPT_TEMPLATE = '''
 
      '''
 
-class RAG:
+class RAGBase:
     def __init__(
         self,
         index,
