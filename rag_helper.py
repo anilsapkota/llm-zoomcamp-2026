@@ -70,7 +70,7 @@ class RAGBase:
 
         message_history = [
             {'role': 'developer', 'content': instructions},
-            {'role': 'user', 'content': user_prompt},
+            {'role': 'user', 'content':user_prompt},
         ]
 
         response = self.llm_client.responses.create(
@@ -85,7 +85,7 @@ class RAGBase:
     def rag(self,query):
         search_results = self.search(query)
         prompt = self.build_prompt(query, search_results)
-        answer = self.llm(prompt)
+        answer = self.llm(self.instructions, prompt)
         return answer 
 
 
